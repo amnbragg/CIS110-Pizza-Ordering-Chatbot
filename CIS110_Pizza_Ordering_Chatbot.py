@@ -13,57 +13,76 @@ if userName.lower() == "david bragg":
 else:
     print(f"\nHello, {userName}. Nice to meet you!")
 
-#Inputs needed from the user
-size = input("\nWhat size would you like? Enter small, medium, or large:  ")
-while size.lower() not in ["small", "medium", "large" ]:
-    size = input("Invalid vaule!  Please enter small, medium, or large:  ")
+#While loop that keeps looping as long as keepyGoing is "y"
+keepGoing = "y"
+while keepGoing.lower() == "y":
     
-flavor = input("\nWhat kind of flavor would you like?:  ")
-while len(flavor) == 0:
-    flavor = input("Flavor cannot be blank!  Please enter a flavor:  ")
+    #Inputs needed from the user
+    size = input("\nWhat size would you like? Enter small, medium, or large:  ")
+    while size.lower() not in ["small", "medium", "large" ]:
+        size = input("Invalid vaule!  Please enter small, medium, or large:  ")
     
-crustType = input("\nWhat type of crust would you like?:  ")
-while len(crustType) == 0:
-    crustType = input("Crust type cannot be blank!  Please enter crust type:  ")
+    flavor = input("\nWhat kind of flavor would you like?:  ")
+    while len(flavor) == 0:
+        flavor = input("Flavor cannot be blank!  Please enter a flavor:  ")
     
-quantity = input("\nHow many of those would you like to order? Enter a numeric value:  ")
-while not quantity.isdigit():
-    quanitiy = input("Vaule not recognized. Please enter a numeric vaule:  ")
-quantity = int(quantity)
-
-method = input("\nIs this for delivery or carry out?:  ")
-
-#Set Delivery Fee
-if method.lower() == "delivery":
-    deliveryFee = 5
-else:
-    deliveryFee = 0
-
-#Assign a fixed vaule for sales tax and price per pizza
-salesTax = 1.1
-
-#Set the price per pizza
-if size.lower() == "small":
-    pizzaCost = 8.99
-elif size.lower() == "medium":
-    pizzaCost = 14.99
-elif size.lower() == "large":
-    pizzaCost = 17.99
-
-#Algorithm to calculate the total cost of order
-total = (pizzaCost * quantity) * salesTax + deliveryFee
-
-#Output order summary
-print("-" * 10)
-print(f"Thank you, {userName}, for you order.")
-print(f"Your {quantity} {size} {flavor} pizza(s) with {crustType} crust ${total:,.2f}.")
-print("-" * 10)
-print(f"Your {quantity} {size} {flavor} pizza(s) with {crustType} crust costs${total:,.2f}.")
-
-#Display Coupon if total price of order is greater than or equal to $50
-if total >= 50:
-    print("\nCongratulations! You've been awarded a $10 off coupon for your next order.")
-else:
-    print("\nOrder over $50 will receive a free $10 off coupon!")
+    crustType = input("\nWhat type of crust would you like?:  ")
+    while len(crustType) == 0:
+        crustType = input("Crust type cannot be blank!  Please enter crust type:  ")
     
-print("-" * 10)
+    quantity = input("\nHow many of those would you like to order? Enter a numeric value:  ")
+    while not quantity.isdigit():
+        quanitiy = input("Vaule not recognized. Please enter a numeric vaule:  ")
+    quantity = int(quantity)
+
+    method = input("\nIs this for delivery or carry out?:  ")
+
+    #Set Delivery Fee
+    if method.lower() == "delivery":
+        deliveryFee = 5
+    else:
+        deliveryFee = 0
+
+    #Assign a fixed vaule for sales tax and price per pizza
+    salesTax = 1.1
+
+    #Set the price per pizza
+    if size.lower() == "small":
+        pizzaCost = 8.99
+    elif size.lower() == "medium":
+        pizzaCost = 14.99
+    elif size.lower() == "large":
+        pizzaCost = 17.99
+
+    #Algorithm to calculate the total cost of order
+    total = (pizzaCost * quantity) * salesTax + deliveryFee
+
+    #Output order summary
+    print("-" * 10)
+    print(f"Thank you, {userName}, for you order.")
+    print(f"Your {quantity} {size} {flavor} pizza(s) with {crustType} crust ${total:,.2f}.")
+    print("-" * 10)
+    print(f"Your {quantity} {size} {flavor} pizza(s) with {crustType} crust costs${total:,.2f}.")
+
+    #Display Coupon if total price of order is greater than or equal to $50
+    if total >= 50:
+        print("\nCongratulations! You've been awarded a $10 off coupon for your next order.")
+    else:
+        print("\nOrder over $50 will receive a free $10 off coupon!")
+    
+    print("-" * 10)
+
+    #Nested Loops to create a countdown timer
+    print("Order has been received. ETA 3 mins!")
+    for min in range(3, 0, -1):
+        print(min, ",mintues remaining")
+        for seconds in range(60, 0, -1):
+            print(seconds, end = "\r")
+            import time
+            time.sleep(1)
+    print("Order is ready!")
+
+    #SO our application doesn't repeat forever, ask if user wants to keep going and order another pizza
+    keepGoing = input("Do you want to place another order?  Enter y or n:  ")
+    while keepGoing not in ["y", "n"]:
+        keepGoing = input("Invalid vaule!  Please type y or n: ")
